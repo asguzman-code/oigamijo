@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>La Estancia Hotel</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    background:#f4efe7;
+    color:#222;
+    font-family:'Inter',sans-serif;
+    overflow-x:hidden;
+}
+
+h1,h2,h3{
+    font-family:'Cormorant Garamond',serif;
+    font-weight:600;
+}
+
+img{
+    width:100%;
+    display:block;
+}
+
+section{
+    padding:100px 8%;
+}
+
+/* HERO */
+
+.hero{
+    height:100vh;
+    background:url('img/hotel_foto.png');
+    background-size:cover;
+    background-position:center;
+    position:relative;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+}
+
+.hero::before{
+    content:'';
+    position:absolute;
+    inset:0;
+    background:rgba(0,0,0,.55);
+}
+
+.hero-content{
+    position:relative;
+    z-index:2;
+    text-align:center;
+    color:white;
+    animation:fadeUp 1.5s ease;
+}
+
+.hero h1{
+    font-size:6rem;
+    letter-spacing:5px;
+}
+
+.hero span{
+    letter-spacing:5px;
+    font-size:.9rem;
+}
+
+.hero p{
+    margin:25px auto;
+    max-width:600px;
+    font-size:1.1rem;
+}
+
+.btn{
+    display:inline-block;
+    padding:15px 40px;
+    border:1px solid white;
+    color:white;
+    text-decoration:none;
+    transition:.4s;
+}
+
+.btn:hover{
+    background:white;
+    color:#222;
+    transform:translateY(-5px);
+}
+
+/* TITULOS */
+
+.section-number{
+    color:#8a6d52;
+    letter-spacing:3px;
+    margin-bottom:15px;
+    font-size:.9rem;
+}
+
+.section-title{
+    font-size:3.5rem;
+    margin-bottom:30px;
+}
+
+/* CONCEPTO */
+
+.concepto{
+    text-align:center;
+}
+
+.concepto p{
+    max-width:850px;
+    margin:auto;
+    line-height:1.8;
+}
+
+.valores{
+    display:flex;
+    justify-content:center;
+    gap:20px;
+    margin-top:50px;
+    flex-wrap:wrap;
+}
+
+.valor{
+    border:1px solid #b69d84;
+    padding:15px 30px;
+    transition:.4s;
+}
+
+.valor:hover{
+    background:#b69d84;
+    color:white;
+    transform:translateY(-8px);
+}
+
+/* IDENTIDAD */
+
+.identidad{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    min-height:600px;
+}
+
+.identidad-info{
+    padding:80px;
+    background:white;
+}
+
+.logo{
+    font-size:3rem;
+    margin:30px 0;
+}
+
+.colores{
+    display:flex;
+    gap:15px;
+    margin:30px 0;
+}
+
+.color{
+    width:60px;
+    height:60px;
+    border-radius:50%;
+}
+
+.c1{background:#2f3828;}
+.c2{background:#734422;}
+.c3{background:#b89b7f;}
+
+.identidad-img{
+    background:url('img/habitacion.png');
+    background-size:cover;
+    background-position:center;
+    position:relative;
+}
+
+.identidad-img::before{
+    content:'';
+    position:absolute;
+    inset:0;
+    background:rgba(0,0,0,.35);
+}
+
+.identidad-img h2{
+    position:absolute;
+    inset:0;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    color:white;
+    font-size:4rem;
+    text-align:center;
+    z-index:2;
+}
+
+/* ESPACIOS */
+
+.grid{
+    margin-top:50px;
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:25px;
+}
+
+.card{
+    overflow:hidden;
+    border-radius:20px;
+    position:relative;
+}
+
+.card img{
+    height:400px;
+    object-fit:cover;
+    transition:1s;
+}
+
+.card:hover img{
+    transform:scale(1.1);
+}
+
+.card span{
+    position:absolute;
+    bottom:20px;
+    left:20px;
+    background:white;
+    padding:10px 25px;
+    border-radius:30px;
+}
+
+/* OFERTA */
+
+.oferta{
+    background:#22281d;
+    color:white;
+}
+
+.oferta h2{
+    font-size:4rem;
+    margin-bottom:40px;
+}
+
+.item{
+    margin-bottom:35px;
+}
+
+.item h3{
+    margin-bottom:10px;
+    font-size:2rem;
+}
+
+/* PUBLICO */
+
+.publico{
+    background:white;
+}
+
+.publico-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:30px;
+    margin-top:50px;
+}
+
+.target{
+    padding:40px;
+    background:#f7f3ee;
+    border-radius:20px;
+    transition:.4s;
+}
+
+.target:hover{
+    transform:translateY(-10px);
+}
+
+.target h3{
+    margin-bottom:15px;
+}
+
+/* FRASE */
+
+.frase{
+    text-align:center;
+}
+
+.frase blockquote{
+    max-width:900px;
+    margin:auto;
+    font-size:3rem;
+    line-height:1.3;
+}
+
+/* FOOTER */
+
+footer{
+    background:#2a3022;
+    color:white;
+    padding:100px 8%;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+footer h2{
+    font-size:4rem;
+}
+
+.contacto h3{
+    margin-bottom:20px;
+}
+
+.contacto p{
+    margin-bottom:10px;
+}
+
+/* ANIMACIONES */
+
+.reveal{
+    opacity:0;
+    transform:translateY(80px);
+    transition:1s;
+}
+
+.reveal.active{
+    opacity:1;
+    transform:translateY(0);
+}
+
+@keyframes fadeUp{
+
+    from{
+        opacity:0;
+        transform:translateY(50px);
+    }
+
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+
+}
+
+@media(max-width:900px){
+
+    .hero h1{
+        font-size:3rem;
+    }
+
+    .identidad{
+        grid-template-columns:1fr;
+    }
+
+    .grid{
+        grid-template-columns:1fr;
+    }
+
+    .publico-grid{
+        grid-template-columns:1fr;
+    }
+
+    footer{
+        flex-direction:column;
+        text-align:center;
+        gap:40px;
+    }
+
+    .frase blockquote{
+        font-size:2rem;
+    }
+
+}
+
+</style>
+</head>
+
+<body>
+
+<header class="hero">
+
+<div class="hero-content">
+
+    <img src="img/logo_estancia.svg" class="hero-logo">
+
+    <p class="hero-tagline">
+        Arquitectura, cultura y descanso en un mismo lugar.
+    </p>
+
+    <a href="#concepto" class="btn">
+        Explorar experiencia
+    </a>
+
+</div>
+
+</header>
+
+<section id="concepto" class="concepto reveal">
+
+    <div class="section-number">01</div>
+
+    <h2 class="section-title">Concepto</h2>
+
+    <p>
+        La esencia nace de la conexión entre la cultura ancestral y el diseño contemporáneo.
+        Un espacio que honra nuestras raíces y ofrece al huésped una experiencia auténtica,
+        cálida y transformadora.
+    </p>
+
+    <div class="valores">
+        <div class="valor">CULTURA</div>
+        <div class="valor">MODERNIDAD</div>
+        <div class="valor">COMODIDAD</div>
+    </div>
+
+</section>
+
+<section class="identidad reveal">
+
+    <div class="identidad-info">
+
+        <div class="section-number">02</div>
+
+        <h2 class="section-title">Identidad Visual</h2>
+
+        <div class="logo">
+            LA ESTANCIA
+        </div>
+
+        <h3>Paleta Cromática</h3>
+
+        <div class="colores">
+            <div class="color c1"></div>
+            <div class="color c2"></div>
+            <div class="color c3"></div>
+        </div>
+
+        <p>
+            Tipografías: Cormorant Garamond + Inter
+        </p>
+
+    </div>
+
+    <div class="identidad-img">
+        <h2>IDENTIDAD VISUAL</h2>
+    </div>
+
+</section>
+
+<section class="reveal">
+
+    <div class="section-number">03</div>
+
+    <h2 class="section-title">Arquitectura y Espacios</h2>
+
+    <p>
+        Diseño que combina materiales naturales, texturas artesanales y luz cálida para crear ambientes que invitan al descanso.
+    </p>
+
+    <div class="grid">
+
+        <div class="card">
+            <img src="img/habitacion.png">
+            <span>Habitaciones</span>
+        </div>
+
+        <div class="card">
+            <img src="img/saladestar.png">
+            <span>Sala de Estar</span>
+        </div>
+
+        <div class="card">
+            <img src="img/terraza.png">
+            <span>Terraza</span>
+        </div>
+
+        <div class="card">
+            <img src="img/restaurante.png">
+            <span>Restaurante</span>
+        </div>
+
+    </div>
+
+</section>
+
+<section class="oferta reveal">
+
+    <div class="section-number">04</div>
+
+    <h2>Oferta de Valor</h2>
+
+    <div class="item">
+        <h3>Ubicación Privilegiada</h3>
+        <p>Cercanía a la cultura y la naturaleza.</p>
+    </div>
+
+    <div class="item">
+        <h3>Diseño con Propósito</h3>
+        <p>Arquitectura que respeta el entorno.</p>
+    </div>
+
+    <div class="item">
+        <h3>Experiencias Auténticas</h3>
+        <p>Conexión con la comunidad, la historia y los sabores locales.</p>
+    </div>
+
+</section>
+
+<section class="publico reveal">
+
+    <div class="section-number">05</div>
+
+    <h2 class="section-title">Público Objetivo</h2>
+
+    <div class="publico-grid">
+
+        <div class="target">
+            <h3>Viajeros Culturales</h3>
+            <p>Interesados en la historia, tradiciones y autenticidad del lugar.</p>
+        </div>
+
+        <div class="target">
+            <h3>Parejas</h3>
+            <p>Buscan experiencias románticas e inolvidables.</p>
+        </div>
+
+        <div class="target">
+            <h3>Viajeros Conscientes</h3>
+            <p>Valoran sostenibilidad, diseño local y turismo responsable.</p>
+        </div>
+
+    </div>
+
+</section>
+
+<section class="frase reveal">
+
+    <blockquote>
+        “La Estancia es más que un hotel, es un lugar para volver a ti mientras descubres el mundo.”
+    </blockquote>
+
+</section>
+
+<footer>
+
+    <div>
+        <img src="img/logo_estancia.svg">
+    </div>
+
+    <div class="contacto">
+        <h3>CONTÁCTANOS</h3>
+        <p>+57 321 458 2873</p>
+        <p>laestanciahotel@gmail.com</p>
+        <p>www.laestanciahotel.com</p>
+    </div>
+
+</footer>
+
+<script>
+
+const reveals = document.querySelectorAll(".reveal");
+
+window.addEventListener("scroll",()=>{
+
+    reveals.forEach(element=>{
+
+        const top = element.getBoundingClientRect().top;
+
+        if(top < window.innerHeight - 100){
+            element.classList.add("active");
+        }
+
+    });
+
+});
+
+</script>
+
+</body>
+</html>

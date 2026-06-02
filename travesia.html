@@ -1,0 +1,724 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>TRAVESÍA</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+
+:root{
+    --dark:#07130f;
+    --forest:#10231c;
+    --gold:#d3bf9f;
+    --light:#f5f1ea;
+}
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    font-family:'Montserrat',sans-serif;
+    background:var(--light);
+    overflow-x:hidden;
+}
+
+section{
+    overflow:hidden;
+}
+
+img{
+    width:100%;
+    display:block;
+}
+
+/* HERO */
+
+.hero{
+    height:100vh;
+    position:relative;
+    background:
+    linear-gradient(rgba(0,0,0,.55),rgba(0,0,0,.55)),
+    url("hero.jpg");
+    background-size:cover;
+    background-position:center;
+    background-attachment:fixed;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    text-align:center;
+}
+
+.hero-content{
+    color:white;
+}
+
+.logo{
+    width:130px;
+    margin:auto;
+    margin-bottom:30px;
+
+    animation:float 4s ease-in-out infinite;
+}
+
+.hero h1{
+    font-family:'Bebas Neue',sans-serif;
+    font-size:7rem;
+    color:var(--gold);
+
+    animation:titleReveal 2s ease forwards;
+}
+
+.hero p{
+    margin-top:15px;
+    letter-spacing:3px;
+    opacity:.8;
+}
+
+@keyframes titleReveal{
+    from{
+        opacity:0;
+        transform:translateY(40px);
+        letter-spacing:40px;
+    }
+    to{
+        opacity:1;
+        transform:translateY(0);
+        letter-spacing:12px;
+    }
+}
+
+@keyframes float{
+    0%,100%{
+        transform:translateY(0);
+    }
+    50%{
+        transform:translateY(-15px);
+    }
+}
+
+/* GENERALES */
+
+.container{
+    width:90%;
+    max-width:1400px;
+    margin:auto;
+}
+
+.section-title{
+    font-family:'Bebas Neue',sans-serif;
+    font-size:4rem;
+    margin-bottom:30px;
+    color:var(--dark);
+}
+
+.fade-up{
+    opacity:0;
+    transform:translateY(60px);
+    transition:1s;
+}
+
+.fade-up.show{
+    opacity:1;
+    transform:translateY(0);
+}
+
+/* QUIENES SOMOS */
+
+.about{
+    padding:120px 0;
+    background:var(--gold);
+}
+
+.about-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:80px;
+    align-items:center;
+}
+
+.about-image{
+    overflow:hidden;
+    border-radius:25px;
+}
+
+.about-image img{
+    transition:1s;
+}
+
+.about-image:hover img{
+    transform:scale(1.08);
+}
+
+.about-text p{
+    line-height:1.8;
+    margin-bottom:20px;
+}
+
+/* ESENCIA */
+
+.values{
+    padding:120px 0;
+    background:white;
+}
+
+.values-grid{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:30px;
+}
+
+.card{
+    background:white;
+    border-radius:20px;
+    padding:40px;
+    text-align:center;
+
+    transition:.4s;
+
+    box-shadow:
+    0 10px 30px rgba(0,0,0,.05);
+}
+
+.card:hover{
+    transform:translateY(-10px);
+    box-shadow:
+    0 25px 50px rgba(0,0,0,.12);
+}
+
+.card h3{
+    margin-bottom:15px;
+    color:var(--forest);
+}
+
+/* PRODUCTOS */
+
+.products{
+    background:var(--dark);
+    color:white;
+    padding:120px 0;
+}
+
+.products .section-title{
+    color:var(--gold);
+}
+
+.product-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:60px;
+    align-items:center;
+}
+
+.product-image{
+    perspective:1000px;
+}
+
+.product-image img{
+    border-radius:20px;
+    transition:.6s;
+}
+
+.product-image:hover img{
+    transform:
+    rotateY(10deg)
+    rotateX(5deg)
+    scale(1.03);
+}
+
+/* OTROS PRODUCTOS */
+
+.other-products{
+    background:var(--gold);
+    padding:120px 0;
+}
+
+.gallery{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:40px;
+}
+
+.item{
+    background:white;
+    border-radius:20px;
+    padding:30px;
+
+    transition:.4s;
+}
+
+.item:hover{
+    transform:translateY(-12px);
+}
+
+.item img{
+    height:280px;
+    object-fit:contain;
+}
+
+/* EXPERIENCIAS */
+
+.experience{
+    background:var(--dark);
+    color:white;
+    padding:120px 0;
+}
+
+.timeline{
+    display:flex;
+    justify-content:space-between;
+    position:relative;
+    margin-top:80px;
+}
+
+.timeline::before{
+    content:"";
+    position:absolute;
+    top:25px;
+    left:0;
+    width:100%;
+    height:3px;
+    background:var(--gold);
+}
+
+.point{
+    position:relative;
+    z-index:2;
+    text-align:center;
+    max-width:220px;
+}
+
+.circle{
+    width:50px;
+    height:50px;
+    border-radius:50%;
+    background:var(--gold);
+
+    margin:auto;
+    margin-bottom:20px;
+
+    transition:.4s;
+}
+
+.point:hover .circle{
+    transform:scale(1.2);
+}
+
+/* DIFERENCIAL */
+
+.differential{
+    padding:120px 0;
+    background:white;
+}
+
+.quote{
+    background:var(--gold);
+    padding:100px 20px;
+    text-align:center;
+}
+
+.quote h2{
+    font-size:3rem;
+    max-width:900px;
+    margin:auto;
+    color:var(--dark);
+}
+
+/* FOOTER */
+
+footer{
+    background:
+    linear-gradient(rgba(7,19,15,.95),rgba(7,19,15,.95)),
+    url("topography.jpg");
+
+    background-size:cover;
+
+    color:var(--gold);
+    padding:100px 0;
+}
+
+.footer-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    align-items:center;
+}
+
+.footer-logo{
+    text-align:center;
+}
+
+.footer-logo img{
+    width:120px;
+    margin:auto;
+    margin-bottom:20px;
+}
+
+.footer-logo h2{
+    font-family:'Bebas Neue';
+    font-size:4rem;
+    letter-spacing:8px;
+}
+
+.contact{
+    text-align:center;
+}
+
+.contact-btn{
+    background:var(--gold);
+    color:black;
+    padding:18px 40px;
+    border:none;
+    border-radius:50px;
+    cursor:pointer;
+    font-weight:bold;
+
+    transition:.3s;
+}
+
+.contact-btn:hover{
+    transform:translateY(-3px);
+}
+
+.contact p{
+    margin-top:15px;
+}
+
+.social{
+    display:flex;
+    justify-content:center;
+    gap:20px;
+    margin-top:30px;
+}
+
+/* RESPONSIVE */
+
+@media(max-width:900px){
+
+.hero h1{
+    font-size:4rem;
+}
+
+.about-grid,
+.product-grid,
+.footer-grid{
+    grid-template-columns:1fr;
+}
+
+.values-grid,
+.gallery{
+    grid-template-columns:1fr;
+}
+
+.timeline{
+    flex-direction:column;
+    gap:50px;
+}
+
+.timeline::before{
+    display:none;
+}
+
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- HERO -->
+
+<section class="hero">
+
+    <div class="hero-content">
+
+        <img src="img/logo_travesia.svg" class="logo">
+
+        <h1>TRAVESÍA</h1>
+
+        <p>Explorar • Conectar • Preservar • Inspirar</p>
+
+    </div>
+
+</section>
+
+<!-- QUIENES SOMOS -->
+
+<section class="about">
+
+<div class="container">
+
+<div class="about-grid fade-up">
+
+<div class="about-text">
+
+<h2 class="section-title">QUIÉNES SOMOS</h2>
+
+<p>
+TRAVESÍA es una marca colombiana inspirada en los caminos,
+montañas y experiencias que conectan a las personas con el territorio.
+</p>
+
+<p>
+Diseñamos productos y experiencias que transforman cada recorrido
+en una historia para contar.
+</p>
+
+</div>
+
+<div class="about-image">
+
+<img src="img/montaña.jpg">
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- ESENCIA -->
+
+<section class="values">
+
+<div class="container">
+
+<h2 class="section-title fade-up">NUESTRA ESENCIA</h2>
+
+<div class="values-grid">
+
+<div class="card fade-up">
+<h3>EXPLORAR</h3>
+<p>Descubrir nuevos caminos y perspectivas.</p>
+</div>
+
+<div class="card fade-up">
+<h3>CONECTAR</h3>
+<p>Vincular personas, cultura y naturaleza.</p>
+</div>
+
+<div class="card fade-up">
+<h3>PRESERVAR</h3>
+<p>Valorar la riqueza natural y cultural colombiana.</p>
+</div>
+
+<div class="card fade-up">
+<h3>INSPIRAR</h3>
+<p>Convertir cada travesía en una experiencia memorable.</p>
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- PRODUCTOS -->
+
+<section class="products">
+
+<div class="container">
+
+<div class="product-grid">
+
+<div class="fade-up">
+
+<h2 class="section-title">
+DICHOS COLOMBIANOS
+</h2>
+
+<p>
+Camisetas diseñadas para quienes llevan la cultura colombiana
+a cada aventura.
+</p>
+
+</div>
+
+<div class="product-image fade-up">
+
+<img src="img/camisas.jpg">
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- OTROS PRODUCTOS -->
+
+<section class="other-products">
+
+<div class="container">
+
+<h2 class="section-title fade-up">
+OTROS PRODUCTOS
+</h2>
+
+<div class="gallery">
+
+<div class="item fade-up">
+<img src="img/BOLSA.png">
+</div>
+
+<div class="item fade-up">
+<img src="img/gorra.png">
+</div>
+
+<div class="item fade-up">
+<img src="img/botilito.png">
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- EXPERIENCIAS -->
+
+<section class="experience">
+
+<div class="container">
+
+<h2 class="section-title">
+EXPERIENCIAS
+</h2>
+
+<div class="timeline">
+
+<div class="point">
+<div class="circle"></div>
+<h3>Caminatas</h3>
+</div>
+
+<div class="point">
+<div class="circle"></div>
+<h3>Senderismo</h3>
+</div>
+
+<div class="point">
+<div class="circle"></div>
+<h3>Naturaleza</h3>
+</div>
+
+<div class="point">
+<div class="circle"></div>
+<h3>Historias</h3>
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- DIFERENCIAL -->
+
+<section class="differential">
+
+<div class="container">
+
+<h2 class="section-title">
+DIFERENCIAL
+</h2>
+
+<p>
+No vendemos prendas. Creamos símbolos para quienes encuentran
+en cada camino una nueva historia.
+</p>
+
+</div>
+
+</section>
+
+<!-- FRASE -->
+
+<section class="quote">
+
+<h2>
+“Cada montaña tiene una historia.
+Cada paso una travesía.”
+</h2>
+
+</section>
+
+<!-- FOOTER -->
+
+<footer>
+
+<div class="container">
+
+<div class="footer-grid">
+
+<div class="footer-logo">
+
+<img src="img/logo_travesia.svg">
+
+<h2>TRAVESÍA</h2>
+
+</div>
+
+<div class="contact">
+
+<button class="contact-btn">
+CONTÁCTANOS
+</button>
+
+<p>+57 321 458 275</p>
+<p>travesiasport@gmail.com</p>
+<p>www.travesiasport.com</p>
+
+<div class="social">
+<span>Behance</span>
+<span>Facebook</span>
+<span>Instagram</span>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</footer>
+
+<script>
+
+const observer = new IntersectionObserver(entries=>{
+
+entries.forEach(entry=>{
+
+if(entry.isIntersecting){
+
+entry.target.classList.add('show');
+
+}
+
+});
+
+},{
+threshold:.15
+});
+
+document.querySelectorAll('.fade-up').forEach(el=>{
+
+observer.observe(el);
+
+});
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,396 @@
+<!DOCTYPE html> 
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Senderos Tunja</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;800&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+
+<style>
+
+/* ===== PALETA ===== */
+:root{
+--fondo:#1c1a17;
+--fondo-sec:#2a2622;
+--ocre:#c2a36b;
+--arcilla:#a0653c;
+--texto:#f5f1e8;
+--borde:rgba(245,241,232,0.15);
+}
+
+body{
+margin:0;
+background:var(--fondo);
+color:var(--texto);
+overflow:hidden;
+font-family:'Playfair Display', serif;
+}
+
+/* ================= INTRO ================= */
+
+.intro{
+position:fixed;
+width:100%;
+height:100vh;
+display:flex;
+align-items:center;
+justify-content:center;
+overflow:hidden;
+z-index:10;
+transition:opacity 0.6s ease;
+}
+
+.intro-bg{
+position:absolute;
+width:110%;
+height:110%;
+background:url("img/fondo_sendero.png") center/cover;
+filter:brightness(0.5);
+}
+
+.intro::after{
+content:"";
+position:absolute;
+width:100%;
+height:100%;
+background:radial-gradient(circle, transparent 20%, black 100%);
+}
+
+.intro-content{
+position:relative;
+text-align:center;
+z-index:2;
+}
+
+.btn{
+margin-top:20px;
+padding:12px 28px;
+border:1px solid rgba(255,255,255,0.2);
+cursor:pointer;
+background:rgba(0,0,0,0.3);
+}
+
+.btn:hover{
+background:var(--ocre);
+color:black;
+}
+
+/* ================= ESCENA ================= */
+
+.scene{
+position:fixed;
+width:300vw;
+height:100vh;
+display:flex;
+transition:1s;
+opacity:0;
+pointer-events:none;
+}
+
+.scene.active{
+opacity:1;
+pointer-events:auto;
+}
+
+.block{
+width:100vw;
+position:relative;
+display:flex;
+align-items:center;
+justify-content:center;
+}
+
+.block img{
+position:absolute;
+width:120%;
+height:120%;
+object-fit:cover;
+filter:brightness(45%);
+z-index:1;
+}
+
+/* ================= TARJETA ================= */
+
+.content{
+position:relative;
+z-index:5;
+background:rgba(42,38,34,0.8);
+padding:50px 40px;
+border-radius:14px;
+border:1px solid rgba(194,163,107,0.25);
+backdrop-filter:blur(10px);
+text-align:center;
+max-width:420px;
+transition:0.4s;
+}
+
+.content:hover{
+transform:translateY(-6px) scale(1.02);
+}
+
+.content h2{
+margin-bottom:10px;
+}
+
+/* ===== META (DEBAJO DEL NOMBRE) ===== */
+
+.meta{
+display:flex;
+justify-content:center;
+gap:8px;
+margin:10px 0 15px 0;
+flex-wrap:wrap;
+}
+
+.tag{
+font-size:12px;
+padding:5px 10px;
+border-radius:20px;
+border:1px solid var(--borde);
+background:rgba(255,255,255,0.04);
+font-family:'Inter';
+letter-spacing:0.5px;
+}
+
+/* diferenciación sutil */
+.tag:nth-child(1){border-color:#6b8f71;}
+.tag:nth-child(2){border-color:#a88c5b;}
+.tag:nth-child(3){border-color:#8c6b5b;}
+
+/* botón */
+.cta-final{
+margin-top:10px;
+padding:10px 20px;
+background:var(--ocre);
+border:none;
+cursor:pointer;
+}
+
+/* ================= RESERVA ================= */
+
+.reserva{
+position:fixed;
+width:100%;
+height:100vh;
+background:var(--fondo);
+display:flex;
+align-items:center;
+justify-content:center;
+opacity:0;
+pointer-events:none;
+transition:1s;
+z-index:20;
+}
+
+.reserva.active{
+opacity:1;
+pointer-events:auto;
+}
+
+form{
+display:flex;
+flex-direction:column;
+gap:10px;
+}
+
+input{
+padding:10px;
+background:var(--fondo-sec);
+border:1px solid var(--borde);
+color:white;
+}
+
+.horarios{
+display:flex;
+gap:8px;
+flex-wrap:wrap;
+}
+
+.slot{
+padding:8px 12px;
+border:1px solid var(--borde);
+cursor:pointer;
+}
+
+.slot.selected{background:var(--arcilla);}
+.slot.full{opacity:0.3;pointer-events:none;}
+
+</style>
+</head>
+
+<body>
+
+<!-- INTRO -->
+<div class="intro" id="intro">
+<div class="intro-bg"></div>
+<div class="intro-content">
+<h1>Caminar también es interpretar</h1>
+<p>Cada sendero guarda una historia invisible.</p>
+<div class="btn" onclick="start()">Iniciar</div>
+</div>
+</div>
+
+<!-- ESCENA -->
+<div class="scene" id="scene">
+
+<!-- 1 -->
+<div class="block">
+<img src="img/letrero.jpeg">
+<div class="content">
+
+<h2>Letrero de Tunja</h2>
+
+<div class="meta">
+<span class="tag">Nivel fácil</span>
+<span class="tag">1 hora</span>
+<span class="tag">Vista urbana</span>
+</div>
+
+<button class="cta-final" onclick="abrirReserva('Letrero de Tunja')">
+Reservar
+</button>
+
+</div>
+</div>
+
+<!-- 2 -->
+<div class="block">
+<img src="img/estoraques.jpg">
+<div class="content">
+
+<h2>Bosque Rojo</h2>
+
+<div class="meta">
+<span class="tag">Nivel medio</span>
+<span class="tag">2 horas</span>
+<span class="tag">Naturaleza</span>
+</div>
+
+<button class="cta-final" onclick="abrirReserva('Bosque Rojo')">
+Reservar
+</button>
+
+</div>
+</div>
+
+<!-- 3 -->
+<div class="block">
+<img src="img/cascada.jpg">
+<div class="content">
+
+<h2>Cascada Motavita</h2>
+
+<div class="meta">
+<span class="tag">Nivel medio</span>
+<span class="tag">3 horas</span>
+<span class="tag">Aventura</span>
+</div>
+
+<button class="cta-final" onclick="abrirReserva('Cascada Motavita')">
+Reservar
+</button>
+
+</div>
+</div>
+
+</div>
+
+<!-- RESERVA -->
+<div class="reserva" id="reserva">
+<div>
+
+<h2 id="reservaTitulo"></h2>
+
+<form id="formReserva">
+<input type="text" id="nombre" placeholder="Nombre" required>
+<input type="date" id="fecha" required>
+
+<div id="horarios" class="horarios"></div>
+
+<button type="submit">Enviar a WhatsApp</button>
+</form>
+
+</div>
+</div>
+
+<script>
+
+let index=0;
+let experiencia="";
+let horario="";
+const numero="573001234567";
+
+const disponibilidad={
+"08:00":4,"10:00":2,"14:00":0,"16:00":5
+};
+
+function start(){
+const intro=document.getElementById("intro");
+intro.style.opacity="0";
+
+setTimeout(()=>{
+intro.style.display="none";
+document.getElementById("scene").classList.add("active");
+},600);
+}
+
+document.addEventListener("wheel",(e)=>{
+if(!scene.classList.contains("active")) return;
+
+index=e.deltaY>0?Math.min(index+1,2):Math.max(index-1,0);
+scene.style.transform=`translateX(-${index*100}vw)`;
+});
+
+function abrirReserva(nombre){
+experiencia=nombre;
+reserva.classList.add("active");
+reservaTitulo.innerText=nombre;
+horarios.innerHTML="";
+horario="";
+}
+
+fecha.addEventListener("change",()=>{
+horarios.innerHTML="";
+Object.keys(disponibilidad).forEach(h=>{
+let div=document.createElement("div");
+div.className="slot";
+div.innerText=h;
+
+if(disponibilidad[h]==0) div.classList.add("full");
+
+div.onclick=()=>{
+document.querySelectorAll(".slot").forEach(s=>s.classList.remove("selected"));
+div.classList.add("selected");
+horario=h;
+};
+
+horarios.appendChild(div);
+});
+});
+
+formReserva.addEventListener("submit",(e)=>{
+e.preventDefault();
+
+if(!horario){
+alert("Selecciona un horario");
+return;
+}
+
+let nombre=document.getElementById("nombre").value;
+let fecha=document.getElementById("fecha").value;
+
+let msg=`Reserva:
+${experiencia}
+${nombre}
+${fecha}
+${horario}`;
+
+window.open(`https://wa.me/${numero}?text=${encodeURIComponent(msg)}`);
+});
+
+</script>
+
+</body>
+</html>

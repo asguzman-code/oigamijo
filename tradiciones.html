@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Museo Vivo</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&display=swap" rel="stylesheet">
+
+<style>
+
+:root{
+--arena:#E6D5B8;
+--beige:#C8A97E;
+--terracota:#C65D3B;
+--cafe:#4B2E2A;
+--oliva:#6B7B4D;
+--crema:#F6F1E7;
+--negro:#0F0C0A;
+}
+
+body{
+margin:0;
+font-family:'Playfair Display', serif;
+background:var(--negro);
+color:var(--crema);
+overflow-x:hidden;
+}
+
+.intro{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100vh;
+background:black;
+overflow:hidden;
+z-index:50;
+}
+
+.frame{
+position:absolute;
+width:100%;
+height:100%;
+opacity:0;
+transition:1.5s ease;
+}
+
+.frame.active{
+opacity:1;
+}
+
+.frame img{
+width:100%;
+height:100%;
+object-fit:cover;
+filter:brightness(0.4);
+transform:scale(1.05);
+}
+
+.overlayIntro{
+position:absolute;
+width:100%;
+height:100%;
+background:radial-gradient(circle, transparent 30%, black 100%);
+z-index:2;
+}
+
+.introText{
+position:absolute;
+bottom:80px;
+left:50%;
+transform:translateX(-50%);
+text-align:center;
+z-index:3;
+}
+
+.introText h1{
+font-size:54px;
+margin:0;
+}
+
+.introText p{
+opacity:0.6;
+margin-top:10px;
+}
+
+.hide{
+opacity:0;
+pointer-events:none;
+transition:1s;
+}
+
+.panel{
+position:fixed;
+right:-420px;
+top:0;
+width:380px;
+height:100vh;
+background:rgba(15,12,10,0.95);
+border-left:1px solid rgba(200,169,126,0.2);
+padding:30px;
+transition:0.5s;
+overflow-y:auto;
+z-index:40;
+}
+
+.panel.active{
+right:0;
+}
+
+.panel h2{
+color:var(--beige);
+margin-top:0;
+}
+
+.panel p{
+opacity:0.8;
+line-height:1.4;
+}
+
+.close{
+margin-top:20px;
+padding:10px;
+border:1px solid var(--beige);
+background:none;
+color:var(--crema);
+cursor:pointer;
+}
+
+.room{
+min-height:100vh;
+display:flex;
+align-items:center;
+justify-content:center;
+flex-direction:column;
+padding:80px 10%;
+position:relative;
+}
+
+.room::before{
+content:"";
+position:absolute;
+inset:0;
+background-size:cover;
+background-position:center;
+filter:brightness(0.35);
+z-index:-1;
+}
+
+.room[data-room="1"]::before{background-image:url('img/mazamorra-dulce.webp');}
+.room[data-room="2"]::before{background-image:url('img/RUNTAZO.jpeg');}
+.room[data-room="3"]::before{background-image:url('img/CUCHUCO.avif');}
+
+.title{
+font-size:42px;
+margin:0;
+text-align:center;
+}
+
+.subtitle{
+opacity:0.8;
+margin-top:10px;
+max-width:600px;
+text-align:center;
+color:var(--arena);
+}
+
+.art-grid{
+margin-top:40px;
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:20px;
+width:100%;
+max-width:1000px;
+}
+
+.art{
+position:relative;
+cursor:pointer;
+overflow:hidden;
+border:1px solid rgba(200,169,126,0.2);
+transition:0.5s;
+}
+
+.art:hover{
+transform:translateY(-6px);
+border-color:var(--terracota);
+}
+
+.art img{
+width:100%;
+height:220px;
+object-fit:cover;
+filter:brightness(0.65);
+transition:0.6s;
+}
+
+.art:hover img{
+transform:scale(1.05);
+filter:brightness(0.85);
+}
+
+.art::after{
+content:"";
+position:absolute;
+inset:0;
+background:linear-gradient(
+to top,
+rgba(15,12,10,0.95),
+rgba(15,12,10,0.2),
+transparent
+);
+opacity:0;
+transition:0.4s ease;
+}
+
+.art:hover::after{
+opacity:1;
+}
+
+.art .hover-info{
+position:absolute;
+bottom:0;
+left:0;
+width:100%;
+padding:14px 14px 16px;
+opacity:0;
+transform:translateY(10px);
+transition:0.4s ease;
+z-index:2;
+}
+
+.art:hover .hover-info{
+opacity:1;
+transform:translateY(0);
+}
+
+.art .hover-info h4{
+margin:0;
+font-size:14px;
+color:var(--beige);
+}
+
+.art .hover-info p{
+margin-top:6px;
+font-size:12px;
+color:var(--arena);
+opacity:0.9;
+line-height:1.3;
+}
+
+.art h3{
+position:absolute;
+bottom:10px;
+left:10px;
+margin:0;
+font-size:16px;
+z-index:3;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="intro" id="intro">
+
+<div class="frame active">
+<img src="img/01.JPG">
+</div>
+
+<div class="frame">
+<img src="img/04.webp">
+</div>
+
+<div class="frame">
+<img src="img/ZONDW7IKIJDZLGDSVQKMVO42EQ.avif">
+</div>
+
+<div class="overlayIntro"></div>
+
+<div class="introText">
+<h1>Oiga Mijo</h1>
+<p>Tradiciones de Tunja en exposición</p>
+</div>
+
+</div>
+
+<div class="panel" id="panel">
+<h2 id="pTitle"></h2>
+<p id="pText"></p>
+<button class="close" onclick="closePanel()">Cerrar</button>
+</div>
+
+<section class="room" data-room="1">
+
+<h1 class="title">Gastronomía</h1>
+<p class="subtitle">La cocina como archivo vivo de la memoria cultural.</p>
+
+<div class="art-grid">
+
+<div class="art" onclick="openPanel('Mazamorra','Preparación tradicional transmitida oralmente.')">
+<img src="img/mazamorra-dulce.webp">
+
+<div class="hover-info">
+<h4>Mazamorra</h4>
+<p>Preparación tradicional transmitida oralmente en contextos familiares.</p>
+</div>
+
+<h3>Mazamorra</h3>
+</div>
+
+<div class="art" onclick="openPanel('Cuchuco','Relación entre clima y alimentación tradicional.')">
+<img src="img/CUCHUCO.avif">
+
+<div class="hover-info">
+<h4>Cuchuco</h4>
+<p>Relación entre clima, agricultura y memoria alimentaria.</p>
+</div>
+
+<h3>Cuchuco</h3>
+</div>
+
+<div class="art" onclick="openPanel('Ritual doméstico','Actos culinarios como memoria cotidiana.')">
+<img src="img/RUNTAZO.jpeg">
+
+<div class="hover-info">
+<h4>Runtazo</h4>
+<p>Prácticas culinarias como mezcla cultural.</p>
+</div>
+
+<h3>Runtazo</h3>
+</div>
+
+</div>
+
+</section>
+
+<section class="room" data-room="2">
+
+<h1 class="title">Cotidianidad</h1>
+<p class="subtitle">Prácticas sociales y gestos urbanos de identidad.</p>
+
+<div class="art-grid">
+
+<div class="art" onclick="openPanel('Ritual urbano','Dinámicas sociales en el espacio público.')">
+<img src="img/01.JPG">
+
+<div class="hover-info">
+<h4>Palomar </h4>
+<p>Construyendo tejido social.</p>
+</div>
+
+<h3>Palomar</h3>
+</div>
+
+<div class="art" onclick="openPanel('Memoria doméstica','Relaciones familiares y transmisión cultural.')">
+<img src="img/02.JPG">
+
+<div class="hover-info">
+<h4>Tinteando</h4>
+<p>Un café para el clima frío</p>
+</div>
+
+<h3>Tinteando</h3>
+</div>
+
+<div class="art" onclick="openPanel('Ciudad','Flujos cotidianos en la ciudad histórica.')">
+<img src="img/plazamercado.jpg">
+
+<div class="hover-info">
+<h4>Esfuerzo</h4>
+<p>Personas fuertes trabajadores.</p>
+</div>
+
+<h3>Esfuerzo</h3>
+</div>
+
+</div>
+
+</section>
+
+<section class="room" data-room="3">
+
+<h1 class="title">Festividades</h1>
+<p class="subtitle">Expresiones colectivas de memoria y continuidad cultural.</p>
+
+<div class="art-grid">
+
+<div class="art" onclick="openPanel('Fiesta','Rituales festivos como construcción identitaria.')">
+<img src="img/07.jpg">
+
+<div class="hover-info">
+<h4>Aguinaldo Boyacense</h4>
+<p>Celebración como acto de identidad decembrina.</p>
+</div>
+
+<h3>Aguinaldo Boyacense</h3>
+</div>
+
+<div class="art" onclick="openPanel('Tradición','Prácticas comunitarias en el espacio público.')">
+<img src="img/05.jpg">
+
+<div class="hover-info">
+<h4>Semana Santa</h4>
+<p>Continuidad cultural en el tiempo religioso.</p>
+</div>
+
+<h3>Semana Santa</h3>
+</div>
+
+<div class="art" onclick="openPanel('Aguinaldos','Memoria festiva y transmisión generacional.')">
+<img src="img/aguinaldo.jpg">
+
+<div class="hover-info">
+<h4>Festival Internacional de la Cultura</h4>
+<p>Rituales festivos heredados entre generaciones.</p>
+</div>
+
+<h3>Festival Internacional de la Cultura</h3>
+</div>
+
+</div>
+
+</section>
+
+<script>
+
+const panel = document.getElementById("panel");
+const pTitle = document.getElementById("pTitle");
+const pText = document.getElementById("pText");
+
+function openPanel(title,text){
+pTitle.innerText = title;
+pText.innerText = text;
+panel.classList.add("active");
+}
+
+function closePanel(){
+panel.classList.remove("active");
+}
+
+const intro = document.getElementById("intro");
+const frames = document.querySelectorAll(".frame");
+
+let i = 0;
+
+function cycle(){
+frames.forEach(f => f.classList.remove("active"));
+frames[i].classList.add("active");
+
+i++;
+
+if(i < frames.length){
+setTimeout(cycle, 2000);
+}else{
+setTimeout(()=>{
+intro.classList.add("hide");
+},1500);
+}
+}
+
+cycle();
+
+</script>
+
+</body>
+</html>
